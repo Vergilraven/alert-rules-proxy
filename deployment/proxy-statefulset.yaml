@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: proxy-server
+  labels:
+    app: proxy-server
+spec:
+  serviceName: proxy-server-headless
+  replicas: 2
+  selector:
+    matchLabels:
+      app: proxy-server
+  template:
+    metadata:
+      labels:
+        app: proxy-server
+    spec:
+      containers:
+      - name: proxy-server
+        image: <your-dockerhub-username>/proxy-server:latest
+        ports:
+        - containerPort: 8080
+        # 设置资源限制 (可选)
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: proxy-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: proxy-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
