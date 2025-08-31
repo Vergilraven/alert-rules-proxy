@@ -1,11 +1,11 @@
 pipeline {
     agent any
     
-    tools {
-        // 根据项目需要选择合适的工具
-        maven 'Maven 3.8.1'
-        jdk 'JDK 11'
-    }
+//     tools {
+//         // 根据项目需要选择合适的工具
+//         maven 'Maven 3.8.1'
+//         jdk 'JDK 11'
+//     }
     
     environment {
         // 定义环境变量
