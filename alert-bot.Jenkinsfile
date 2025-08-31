@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'dynamic-jenkins-agent' }
+    agent any
     
 //     tools {
 //         // 根据项目需要选择合适的工具
