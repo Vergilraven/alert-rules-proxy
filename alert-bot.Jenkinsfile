@@ -1,5 +1,5 @@
 pipeline {
-    agent nodejs-builder
+    agent { label 'nodejs-builder' }
     
 //     tools {
 //         // 根据项目需要选择合适的工具
