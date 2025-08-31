@@ -63,16 +63,16 @@ pipeline {
             steps {
                 script {
                     echo "代码分析..."
-                    
+
                     // 检查代码质量（根据项目类型调整）
                     sh '''
                         # 代码格式检查
                         # find . -name "*.py" -exec python -m py_compile {} \; || true
-                        
+
                         # 代码风格检查（如果使用Python）
                         # pip install flake8
                         # flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-                        
+
                         # 统计代码行数
                         echo "代码文件统计:"
                         find . -type f -name "*.py" -o -name "*.java" -o -name "*.js" -o -name "*.ts" | wc -l
@@ -80,6 +80,7 @@ pipeline {
                 }
             }
         }
+
         
         stage('Build') {
             steps {
