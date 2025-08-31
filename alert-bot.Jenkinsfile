@@ -67,7 +67,7 @@ pipeline {
                     // 检查代码质量（根据项目类型调整）
                     sh '''
                         # 代码格式检查
-                        # find . -name "*.py" -exec python -m py_compile {} \; || true
+                        # find . -name "*.py" -exec python -m py_compile {} \\; || true
 
                         # 代码风格检查（如果使用Python）
                         # pip install flake8
