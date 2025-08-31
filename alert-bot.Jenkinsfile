@@ -43,13 +43,17 @@ pipeline {
             steps {
                 script {
                     echo "开始同步仓库代码..."
-                    
-                    // 获取最新代码
+                    // 获取最新代码并安全地处理分支
                     sh '''
                         git fetch --all
-                        git pull origin ${BRANCH_NAME}
+                        CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+                        if [ "$CURRENT_BRANCH" != "HEAD" ]; then
+                            echo "当前在分支: $CURRENT_BRANCH"
+                            git pull origin $CURRENT_BRANCH
+                        else
+                            echo "当前处于分离HEAD状态，跳过pull操作"
+                        fi
                     '''
-                    
                     // 显示当前分支和提交信息
                     sh '''
                         echo "当前分支: $(git branch --show-current)"
